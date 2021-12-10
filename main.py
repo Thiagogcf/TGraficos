@@ -13,7 +13,15 @@ xval = []
 yval = []
 xvala = []
 yvala = []
+regioes = []
 
+def filtraregioes():
+    for i in range(len(data['ObservationDate'])):
+        if str(data['Country/Region'][i]) == 'Brazil':
+            if (str(data['Province/State'][i]) not in regioes) and (
+                    str(data['Province/State'][i]) not in ('nan', 'Unknown')):
+                regioes.append(str(data['Province/State'][i]))
+    print(regioes)
 
 def plotar(filtro,filtrado,vy):
     for i in range(datetime.strptime((data['ObservationDate'][i]))):
@@ -27,13 +35,16 @@ def plotar(filtro,filtrado,vy):
     xval.clear()
     yval.clear()
 
-# plt.ticklabel_format(axis="y",style='sci',scilimits=(0,0))
-plotar('Province/State','Santa Catarina','Confirmed')
-# plotar('Province/State','Bahia','Confirmed')
-plotar('Province/State','Rio de Janeiro','Confirmed')
-# plotar('Province/State','Rondonia','Confirmed')
-plotar('Province/State','Parana','Confirmed')
-plotar('Province/State','Sao Paulo','Confirmed')
+filtraregioes()
+for z in range(len(regioes)):
+    plotar('Province/State', str(regioes[z]), 'Confirmed')
+# # plt.ticklabel_format(axis="y",style='sci',scilimits=(0,0))
+# plotar('Province/State','Santa Catarina','Confirmed')
+# # plotar('Province/State','Bahia','Confirmed')
+# plotar('Province/State','Rio de Janeiro','Confirmed')
+# # plotar('Province/State','Rondonia','Confirmed')
+# plotar('Province/State','Parana','Confirmed')
+# plotar('Province/State','Sao Paulo','Confirmed')
 plt.legend()
 plt.show()
 # plt.savefig('1.png')
