@@ -16,9 +16,9 @@ yvala = []
 
 
 def plotar(filtro,filtrado,vy):
-    for i in range(datetime.strptime((data['ObservationDate'][i]))):
+    for i in range(len(data['ObservationDate'])):
         if str(data[filtro][i]) == filtrado:
-            yval.append(int(data[vy][i]))
+            yval.append(int(data[vy][i])-int(data['Deaths'][i])-int(data['Recovered'][i]))
             auxdata = datetime.strptime((data['ObservationDate'][i]), '%m/%d/%Y')
             xval.append(auxdata)
 
